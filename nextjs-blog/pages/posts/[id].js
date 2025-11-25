@@ -1,7 +1,7 @@
 // Import the Layout component to wrap the page content
 import Layout from '../../components/layout';
 // Import the getAllPostIds and getPostData helpers for dynamic routes and post content
-import { getAllPostIds, getPostData } from '../../lib/posts';
+import { getAllPostIds, getPostData } from '../../lib/posts-json';
 import Head from 'next/head';
 import Date from '../../components/date';
 import utilStyles from '../../styles/utils.module.css';
@@ -25,7 +25,7 @@ import utilStyles from '../../styles/utils.module.css';
   }
 // Define getStaticPaths to prerender dynamic routes for all post IDs at build time
 export async function getStaticPaths() {
-    const paths = getAllPostIds();
+    const paths = await getAllPostIds();
     return {
       paths,
       fallback: false,

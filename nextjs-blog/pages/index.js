@@ -6,13 +6,13 @@ import Layout, { siteTitle } from '../components/layout';
 // Import CSS module styles for utility classes
 import utilStyles from '../styles/utils.module.css';
 // Import the getSortedPostsData function from the posts.js file
-import { getSortedPostsData } from '../lib/posts';
+import { getSortedPostsData } from '../lib/posts-json';
 import Link from 'next/link';
 import Date from '../components/date';
 // Define the getStaticProps function that will be called at build time to get the allPostsData
 export async function getStaticProps() {
   // Get the allPostsData from the posts.js file to pass it to the Home component
-  const allPostsData = getSortedPostsData();
+  const allPostsData = await getSortedPostsData();
   return {
     props: {
       allPostsData,
@@ -38,7 +38,7 @@ export default function Home({ allPostsData }) {
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
+          {allPostsData.map(({ id, title, date }) => (
             <li className={utilStyles.listItem} key={id}>
             <Link href={`/posts/${id}`}>{title}</Link>
             <br />
